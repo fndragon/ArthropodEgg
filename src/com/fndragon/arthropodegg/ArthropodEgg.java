@@ -14,8 +14,10 @@ public class ArthropodEgg extends JavaPlugin {
 
 	@Override
 	public void onEnable() {
+		this.saveDefaultConfig();
+		
 		getLogger().info("ArthropodEgg has been enabled.");
-		getServer().getPluginManager().registerEvents( new ArthropodEggEntityListener(), this );
+		getServer().getPluginManager().registerEvents( new ArthropodEggEntityListener(this), this );
 	}
 	
 	@Override
