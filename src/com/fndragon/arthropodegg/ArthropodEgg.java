@@ -12,13 +12,6 @@ import com.fndragon.arthropodegg.ArthropodEggEntityListener;
  */
 public class ArthropodEgg extends JavaPlugin {
 
-	/**
-	 * 
-	 */
-	/*public ArthropodEgg() {
-		// TODO Auto-generated constructor stub
-	}*/
-
 	@Override
 	public void onEnable() {
 		getLogger().info("ArthropodEgg has been enabled.");
