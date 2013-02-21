@@ -1,3 +1,20 @@
 name: ArthropodEgg
 main: com.fndragon.arthropodegg.ArthropodEgg
-version: 1.0
+version: 1.2
+commands:
+   arthropodegg:
+      description: This is used to interact with the arthropodegg plugin
+      usage: |
+        /<command> version - Get the version
+        /<command> list - Get the current list of eggable entity ids
+        /<command> add (id#) - Add an entity id to the list
+        /<command> remove (id#) - Remove an entity id from the list
+        /<command> debug (on|off) - Turn debug messages on or off
+        /<command> reset - Reload default config.yml from plugin defaults
+        /<command> reload - Reload current config.yml from disk
+        /<command> save - Save current config to config.yml
+        /<command> arthropodrate (0..1] - Set % drop rate for each level of Bane of Arthropods Enchantment
+        /<command> lootingrate (0..1] - Set % drop rate for each level of Looting Enchantment (BoA still required)
+        /<command> removedrops (on|off) - If egg is generated, remove regular drops for the mob
+      permission: op
+      permission-message: You don't have <permission>

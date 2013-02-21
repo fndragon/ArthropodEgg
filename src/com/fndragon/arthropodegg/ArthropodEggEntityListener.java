@@ -17,7 +17,7 @@ public class ArthropodEggEntityListener implements Listener {
 	public ArthropodEggEntityListener( ArthropodEgg instance ) {
 		plugin = instance;
 	}
-	
+		
 	@EventHandler
 	public void onEntityDeath( EntityDeathEvent event ) {
 		Player targetPlayer = event.getEntity().getKiller();
@@ -54,20 +54,30 @@ public class ArthropodEggEntityListener implements Listener {
 		}
 		
 		double randomNum = Math.random();
-		double percentPerLevel = plugin.getConfig().getDouble( "eggdropPercentage" );
+		double eggArthropodPercentage = plugin.getConfig().getDouble( "eggArthropodPercentage" );
+		double eggLootingPercentage = plugin.getConfig().getDouble( "eggLootingPercentage" );
+		double levelOfArthropod = handstack.getEnchantmentLevel(org.bukkit.enchantments.Enchantment.DAMAGE_ARTHROPODS);
+		double levelOfLooting = handstack.getEnchantmentLevel(org.bukkit.enchantments.Enchantment.LOOT_BONUS_MOBS);
 		
+		double targetPercentage = (eggArthropodPercentage * levelOfArthropod) + (eggLootingPercentage * levelOfLooting);
 		if( plugin.getConfig().getBoolean("eggDebug")) {
-			targetPlayer.sendMessage( "Ench level is " + handstack.getEnchantmentLevel(org.bukkit.enchantments.Enchantment.DAMAGE_ARTHROPODS));
-			targetPlayer.sendMessage( "Target Float is " + percentPerLevel * handstack.getEnchantmentLevel(org.bukkit.enchantments.Enchantment.DAMAGE_ARTHROPODS));
-			targetPlayer.sendMessage( "randnum is " + randomNum );
+			targetPlayer.sendMessage( "Arth[" + levelOfArthropod + "], Loot[" + levelOfLooting + "]");
+			targetPlayer.sendMessage( "Total =" + targetPercentage * 100 + "%, random% is " + randomNum * 100 );
 		}
 		
 		// Get the level of enchantment, multiply by percentPerLevel, compare against random #
-		if( randomNum < (percentPerLevel * (double)handstack.getEnchantmentLevel(org.bukkit.enchantments.Enchantment.DAMAGE_ARTHROPODS) ) )
+		if( randomNum < (eggArthropodPercentage * (double)handstack.getEnchantmentLevel(org.bukkit.enchantments.Enchantment.DAMAGE_ARTHROPODS) ) )
 		{
 			// Figure out the right item type to drop.
 			ItemStack item = new ItemStack(383, 1, event.getEntity().getType().getTypeId());
+			if( plugin.getConfig().getBoolean("eggRemoveDrops")) {
+				event.getDrops().clear();
+				event.setDroppedExp(0);
+			}
 			event.getDrops().add( item );
+			if( plugin.getConfig().getBoolean("eggDebug")) {
+				targetPlayer.sendMessage( "Egg generated." );
+			}
 		}		
 	}
 }
