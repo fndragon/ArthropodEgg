@@ -1,6 +1,6 @@
 name: ArthropodEgg
 main: com.fndragon.arthropodegg.ArthropodEgg
-version: 1.2
+version: 1.3
 commands:
    arthropodegg:
       description: This is used to interact with the arthropodegg plugin

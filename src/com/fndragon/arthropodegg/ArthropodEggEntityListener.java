@@ -65,8 +65,8 @@ public class ArthropodEggEntityListener implements Listener {
 			targetPlayer.sendMessage( "Total =" + targetPercentage * 100 + "%, random% is " + randomNum * 100 );
 		}
 		
-		// Get the level of enchantment, multiply by percentPerLevel, compare against random #
-		if( randomNum < (eggArthropodPercentage * (double)handstack.getEnchantmentLevel(org.bukkit.enchantments.Enchantment.DAMAGE_ARTHROPODS) ) )
+		// Check if egg should be spawned
+		if( randomNum < targetPercentage )
 		{
 			// Figure out the right item type to drop.
 			ItemStack item = new ItemStack(383, 1, event.getEntity().getType().getTypeId());
